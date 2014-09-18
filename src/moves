@@ -1,0 +1,11 @@
+moves
+
+resetBoard();
+displayBoard();
+attemptMove(2,1,3,2);
+attemptMove(5,2,4,3);
+attemptMove(2,3,3,4);
+attemptMove(4,3,2,1);
+attemptMove(3,4,4,3);
+attemptMove(5,4,3,2);
+attemptMove(1,2,3,0);
