@@ -1,15 +1,13 @@
 
-var changeBackground = function() {
-  $('body').css('background-color', '#d3c5b1');
-};
-$(document).on('click', 'button', changeBackground);
+// var changeBackground = function() {
+//   $('body').css('background-color', '#d3c5b1');
+// };
+// $(document).on('click', 'button', changeBackground);
 
 
 $(document).on('boardChange', function() {
   displayBoard();
 });
-
-// $(document).trigger('boardChange');
 
 
 $(document).on('pieceTaken', function(e, row, col) {
@@ -24,10 +22,13 @@ $(document).on('pieceTaken', function(e, row, col) {
   alert('A piece was taken at row ' + row + ' column ' + col + '.');
 });
 
-// $(document).trigger('pieceTaken');
 
 $(document).on('invalidMove', function(e, error) {
   alert(error)
 });
 
-// $(document).trigger('invalidMove');
+
+$(document).on('turns', function(e) {
+  $('.number').empty();
+  $('.number').append('There have been ' + turns + ' turns.');
+})

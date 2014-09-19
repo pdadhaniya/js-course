@@ -1,4 +1,4 @@
-var board, currentPlayer, input, integers, startRow, startCol, endRow, endCol;
+var board, currentPlayer, input, integers, startRow, startCol, endRow, endCol, turns;
 
 var resetBoard = function () {
   board = [
@@ -84,6 +84,7 @@ var canCapture = function() {
 };
 
 var makeMove = function(row1, col1, row2, col2) {
+  turns += 1;
   board[row2][col2] = board[row1][col1];
   board[row1][col1] = ' X ';
   if (currentPlayer === 'wht') {
@@ -92,6 +93,7 @@ var makeMove = function(row1, col1, row2, col2) {
     currentPlayer = 'wht';
   }
   $(document).trigger('boardChange');
+  $(document).trigger('turns');
 };
 
 var removePiece = function(row, col) {
@@ -123,9 +125,12 @@ var getMove = function() {
 
 var play = function() {
   resetBoard();
+  turns = 0;
+  $(document).trigger('turns');
   displayBoard();
   getMove();
 };
+
 
 
 

@@ -29,3 +29,8 @@
   display: inline-block;
   border-radius: 50%;
 }
+
+.number {
+  background-color: blue;
+  color: orange;
+}
