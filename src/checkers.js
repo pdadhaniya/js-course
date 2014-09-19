@@ -1,4 +1,4 @@
-var board, currentPlayer, input, integers;
+var board, currentPlayer, input, integers, startRow, startCol, endRow, endCol;
 
 var resetBoard = function () {
   board = [
@@ -108,9 +108,34 @@ var removePiece = function(row, col) {
 
 var getMove = function() {
   input = prompt("What move would you like to make? Please enter the row and column of the piece you want to move, and the row and column of the destination. Comma separate your coordinates with no spaces");
-  // input_string = input.split(",").join('');
-  // integers = parseInt(input_string);
-  integers = input.split(',').map(function(item) {
-    return parseInt(item);
-  });
+  if (input === 'quit') {
+    move = {
+      quit: true
+    };
+  } else {
+    integers = input.split(',').map(function(item) {
+      return parseInt(item);
+    });
+    move = {
+      startRow: integers[0],
+      startCol: integers[1],
+      endRow: integers[2],
+      endCol: integers[3]
+    };
+    attemptMove(move.startRow,move.startCol,move.endRow,move.endCol);
+  }
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
