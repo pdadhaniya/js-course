@@ -121,7 +121,11 @@ var getMove = function() {
 };
 
 
-
+var play = function() {
+  resetBoard();
+  displayBoard();
+  getMove();
+};
 
 
 
