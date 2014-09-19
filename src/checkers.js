@@ -29,8 +29,6 @@ var attemptMove = function (row1, col1, row2, col2) {
       if ( (row2-row1 === -2) && (Math.abs(col2-col1) ===2) && (board[(row1-1)][((col1+col2)/2)] === 'wht')  ) {
         removePiece( ( (row1+row2) / 2 ), ( (col1+col2) / 2 ) );
         makeMove(row1, col1, row2, col2);
-        board[row1][col1] = ' X ';
-        displayBoard();
       } else {
         $(document).trigger('invalidMove', ['You must make a move to CAPTURE a WHITE piece!!!!!']);
         return "Make a move to CAPTURE!!!!!!!!!";
@@ -39,8 +37,6 @@ var attemptMove = function (row1, col1, row2, col2) {
       if ( (row2-row1 === 2) && (Math.abs(col2-col1) ===2) && (board[(row1+1)][((col1+col2)/2)] === 'red')  ) {
         removePiece(((row1+row2)/2),((col1+col2)/2))
         makeMove(row1, col1, row2, col2);
-        board[row1][col1] = ' X ';
-        displayBoard();
       } else {
         $(document).trigger('invalidMove', ['You must make a move to CAPTURE a RED piece!!!!!']);
         return "Make a move to CAPTURE!!!!!!!!!";
@@ -50,7 +46,6 @@ var attemptMove = function (row1, col1, row2, col2) {
       if (currentPlayer === 'red') {
         if ((row2-row1 === -1) && (Math.abs(col2-col1) === 1)) {
           makeMove(row1, col1, row2, col2);
-          displayBoard();
         } else {
           $(document).trigger('invalidMove', ['Please make a valid move.']);
           return "error1"; //add error logic
@@ -58,7 +53,6 @@ var attemptMove = function (row1, col1, row2, col2) {
       } else if (currentPlayer === 'wht') {
         if ((row2-row1 === 1) && (Math.abs(col2-col1) === 1)) {
           makeMove(row1, col1, row2, col2);
-          displayBoard()
         } else {
         $(document).trigger('invalidMove', ['Please make a valid move.']);
         return "error2"; //add error logic
@@ -124,7 +118,6 @@ var getMove = function() {
     };
     attemptMove(move.startRow,move.startCol,move.endRow,move.endCol);
   }
-
 };
 
 

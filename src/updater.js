@@ -6,7 +6,7 @@ $(document).on('click', 'button', changeBackground);
 
 
 $(document).on('boardChange', function() {
-  // board;
+  displayBoard();
 });
 
 // $(document).trigger('boardChange');
