@@ -11,6 +11,7 @@ var resetBoard = function () {
     [' X ', 'red', ' X ', 'red', ' X ', 'red', ' X ', 'red'],
     ['red', ' X ', 'red', ' X ', 'red', ' X ', 'red', ' X ']
   ];
+  $(document).trigger('addSpan');
 
   currentPlayer = 'wht'
 };

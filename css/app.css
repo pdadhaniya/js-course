@@ -1,6 +1,6 @@
 .col {
     display: inline-block;
-  background-color: black;
+  background-color: #003C7D;
   width: 50px;
   height: 50px;
 }
@@ -11,7 +11,7 @@
 }
 
 .empty {
-  background-color: red;
+  background-color: #F47F24;
 }
 
 .red {
