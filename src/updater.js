@@ -50,3 +50,41 @@ $(document).on('showPieces', function(e) {
 $(document).on('addSpan', function(e) {
   $('.col').append("<span class='inner'></span>");
 });
+
+var $beginningCol, $beginningRow, columnNum1, rowNum1;
+var $endingCol, $endingRow, columnNum2, rowNum2;
+var counter = 0;
+
+
+var clickPiece = function() {
+  if (counter === 0) {
+    $beginningCol = $(this).attr('class');
+    $beginningRow = $(this).parent().attr('class');
+    columnNum1 = parseInt($beginningCol.slice(8,9));
+    rowNum1 = charToNum[$beginningRow.slice(8,9)];
+    counter = 1;
+  } else if (counter === 1) {
+      $endingCol = $(this).attr('class');
+      $endingRow = $(this).parent().attr('class');
+      columnNum2 = parseInt($endingCol.slice(8,9));
+      rowNum2 = charToNum[$endingRow.slice(8,9)];
+      counter = 0;  
+  }
+};
+
+// var clickPiece2 = function() {
+// };
+
+
+// var clickCounter = function() {
+//   if (counter === 0) {
+//     $(document).on('click', '.col', clickPiece);
+//   } else if (counter === 1) {
+//     $(document).on('click', '.col', clickPiece2)
+//   };
+// };
+
+
+$(document).on('click', '.col', clickPiece);
+
+
