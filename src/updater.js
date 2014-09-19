@@ -68,7 +68,8 @@ var clickPiece = function() {
       $endingRow = $(this).parent().attr('class');
       columnNum2 = parseInt($endingCol.slice(8,9));
       rowNum2 = charToNum[$endingRow.slice(8,9)];
-      counter = 0;  
+      counter = 0;
+      attemptMove(rowNum1,columnNum1,rowNum2,columnNum2);
   }
 };
 
