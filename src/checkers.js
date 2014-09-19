@@ -1,4 +1,4 @@
-var board, currentPlayer;
+var board, currentPlayer, input, integers;
 
 var resetBoard = function () {
   board = [
@@ -17,26 +17,32 @@ var resetBoard = function () {
 
 var attemptMove = function (row1, col1, row2, col2) {
   if (board[row2][col2] !== ' X ') {
+    $(document).trigger('invalidMove', ["You must move to an empty space!"]);
     return "error"; // add error logic 
   } else if (row1<0 || row1>7 || col1<0 || col1>7 || row2<0 || row2>7 || col2<0 || row2>7) {
+    $(document).trigger('invalidMove', ["Stay on the board please!"]);
     return "error"; // add error logic
   };
 
   if (canCapture()) {
     if (currentPlayer === 'red') {
       if ( (row2-row1 === -2) && (Math.abs(col2-col1) ===2) && (board[(row1-1)][((col1+col2)/2)] === 'wht')  ) {
-        makeMove(row1, col1, row2, col2);
         removePiece( ( (row1+row2) / 2 ), ( (col1+col2) / 2 ) );
+        makeMove(row1, col1, row2, col2);
+        board[row1][col1] = ' X ';
         displayBoard();
       } else {
+        $(document).trigger('invalidMove', ['You must make a move to CAPTURE a WHITE piece!!!!!']);
         return "Make a move to CAPTURE!!!!!!!!!";
       }
     } else if (currentPlayer === 'wht') {
       if ( (row2-row1 === 2) && (Math.abs(col2-col1) ===2) && (board[(row1+1)][((col1+col2)/2)] === 'red')  ) {
-        makeMove(row1, col1, row2, col2);
         removePiece(((row1+row2)/2),((col1+col2)/2))
+        makeMove(row1, col1, row2, col2);
+        board[row1][col1] = ' X ';
         displayBoard();
       } else {
+        $(document).trigger('invalidMove', ['You must make a move to CAPTURE a RED piece!!!!!']);
         return "Make a move to CAPTURE!!!!!!!!!";
       };
     }
@@ -46,13 +52,15 @@ var attemptMove = function (row1, col1, row2, col2) {
           makeMove(row1, col1, row2, col2);
           displayBoard();
         } else {
+          $(document).trigger('invalidMove', ['Please make a valid move.']);
           return "error1"; //add error logic
         }
       } else if (currentPlayer === 'wht') {
         if ((row2-row1 === 1) && (Math.abs(col2-col1) === 1)) {
           makeMove(row1, col1, row2, col2);
-          displayBoard();
+          displayBoard()
         } else {
+        $(document).trigger('invalidMove', ['Please make a valid move.']);
         return "error2"; //add error logic
       }
     }
@@ -83,15 +91,26 @@ var canCapture = function() {
 
 var makeMove = function(row1, col1, row2, col2) {
   board[row2][col2] = board[row1][col1];
-  removePiece(row1, col1);
+  board[row1][col1] = ' X ';
   if (currentPlayer === 'wht') {
     currentPlayer = 'red';
   } else if (currentPlayer === 'red') {
     currentPlayer = 'wht';
   }
+  $(document).trigger('boardChange');
 };
 
 var removePiece = function(row, col) {
-  board[row][col] = ' X '
+  board[row][col] = ' X ';
+  $(document).trigger('pieceTaken', [row, col]);
 };
 
+
+var getMove = function() {
+  input = prompt("What move would you like to make? Please enter the row and column of the piece you want to move, and the row and column of the destination. Comma separate your coordinates with no spaces");
+  // input_string = input.split(",").join('');
+  // integers = parseInt(input_string);
+  integers = input.split(',').map(function(item) {
+    return parseInt(item);
+  });
+};
