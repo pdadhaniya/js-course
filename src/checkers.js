@@ -1,5 +1,8 @@
 var board, currentPlayer, input, integers, startRow, startCol;
 var endRow, endCol, turns, games, errors, taken;
+var $beginningCol, $beginningRow, columnNum1, rowNum1;
+var $endingCol, $endingRow, columnNum2, rowNum2;
+var counter = 0;
 
 var resetBoard = function () {
   board = [
@@ -22,14 +25,10 @@ var attemptMove = function (row1, col1, row2, col2) {
     errors += 1;
     $(document).trigger('errors');
     $(document).trigger('invalidMove', ["You must move to an empty space!"]);
-    // getMove();
-    // return "error"; // add error logic 
   } else if (row1<0 || row1>7 || col1<0 || col1>7 || row2<0 || row2>7 || col2<0 || row2>7) {
     errors += 1;
     $(document).trigger('errors');
     $(document).trigger('invalidMove', ["Stay on the board please!"]);
-    // getMove();
-    // return "error"; // add error logic
   };
 
   if (canCapture()) {
@@ -43,8 +42,6 @@ var attemptMove = function (row1, col1, row2, col2) {
         errors += 1;
         $(document).trigger('errors');
         $(document).trigger('invalidMove', ['You must make a move to CAPTURE a WHITE piece!!!!!']);
-        // getMove();
-        // return "Make a move to CAPTURE!!!!!!!!!";
       }
     } else if (currentPlayer === 'wht') {
       if ( (row2-row1 === 2) && (Math.abs(col2-col1) ===2) && (board[(row1+1)][((col1+col2)/2)] === 'red')  ) {
@@ -56,8 +53,6 @@ var attemptMove = function (row1, col1, row2, col2) {
         errors += 1;
         $(document).trigger('errors');
         $(document).trigger('invalidMove', ['You must make a move to CAPTURE a RED piece!!!!!']);
-        // getMove();
-        // return "Make a move to CAPTURE!!!!!!!!!";
       };
     }
    } else {
@@ -68,8 +63,6 @@ var attemptMove = function (row1, col1, row2, col2) {
           errors += 1;
           $(document).trigger('errors');
           $(document).trigger('invalidMove', ['Please make a valid move.']);
-          // getMove();
-          // return "error1"; //add error logic
         }
       } else if (currentPlayer === 'wht') {
         if ((row2-row1 === 1) && (Math.abs(col2-col1) === 1)) {
@@ -78,8 +71,6 @@ var attemptMove = function (row1, col1, row2, col2) {
         errors += 1;
         $(document).trigger('errors');
         $(document).trigger('invalidMove', ['Please make a valid move.']);
-        // getMove();
-        // return "error2"; //add error logic
       }
     }
   };
@@ -118,7 +109,6 @@ var makeMove = function(row1, col1, row2, col2) {
   }
   $(document).trigger('boardChange');
   $(document).trigger('turns');
-  // getMove();
 };
 
 var removePiece = function(row, col) {
@@ -160,13 +150,7 @@ var play = function() {
   $(document).trigger('errors');
   $(document).trigger('taken');
   displayBoard();
-  // getMove();
 };
-
-var $beginningCol, $beginningRow, columnNum1, rowNum1;
-var $endingCol, $endingRow, columnNum2, rowNum2;
-var counter = 0;
-
 
 var clickPiece = function() {
   if (counter === 0) {

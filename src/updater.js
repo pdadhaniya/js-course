@@ -1,9 +1,4 @@
 
-// var changeBackground = function() {
-//   $('body').css('background-color', '#d3c5b1');
-// };
-// $(document).on('click', 'button', changeBackground);
-
 
 $(document).on('boardChange', function() {
   displayBoard();
@@ -67,27 +62,6 @@ $(document).on('addSpan', function(e) {
   $('.col').append("<span class='inner'></span>");
 });
 
-// var $beginningCol, $beginningRow, columnNum1, rowNum1;
-// var $endingCol, $endingRow, columnNum2, rowNum2;
-// var counter = 0;
-
-
-// var clickPiece = function() {
-//   if (counter === 0) {
-//     $beginningCol = $(this).attr('class');
-//     $beginningRow = $(this).parent().attr('class');
-//     columnNum1 = parseInt($beginningCol.slice(8,9));
-//     rowNum1 = charToNum[$beginningRow.slice(8,9)];
-//     counter = 1;
-//   } else if (counter === 1) {
-//       $endingCol = $(this).attr('class');
-//       $endingRow = $(this).parent().attr('class');
-//       columnNum2 = parseInt($endingCol.slice(8,9));
-//       rowNum2 = charToNum[$endingRow.slice(8,9)];
-//       counter = 0;
-//       attemptMove(rowNum1,columnNum1,rowNum2,columnNum2);
-//   }
-// };
 
 $(document).on('click', '.col', clickPiece);
 
