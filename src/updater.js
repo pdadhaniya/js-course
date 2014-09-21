@@ -27,10 +27,25 @@ $(document).on('invalidMove', function(e, error) {
   alert(error)
 });
 
+$(document).on('errors', function(e) {
+  $('.errors').empty();
+  $('.errors').append('There have been ' + errors + ' erroneous moves.');
+})
+
 
 $(document).on('turns', function(e) {
   $('.number').empty();
   $('.number').append('There have been ' + turns + ' turns.');
+})
+
+$(document).on('newGame', function(e) {
+  $('.games').empty();
+  $('.games').append('There have been ' + games + ' games.' );
+})
+
+$(document).on('taken', function(e) {
+  $('.taken').empty();
+  $('.taken').append('There have been ' + taken + ' pieces taken.');
 })
 
 $(document).on('showPieces', function(e) {
@@ -48,43 +63,31 @@ $(document).on('showPieces', function(e) {
 });
 
 $(document).on('addSpan', function(e) {
+  $('.inner').remove();
   $('.col').append("<span class='inner'></span>");
 });
 
-var $beginningCol, $beginningRow, columnNum1, rowNum1;
-var $endingCol, $endingRow, columnNum2, rowNum2;
-var counter = 0;
+// var $beginningCol, $beginningRow, columnNum1, rowNum1;
+// var $endingCol, $endingRow, columnNum2, rowNum2;
+// var counter = 0;
 
 
-var clickPiece = function() {
-  if (counter === 0) {
-    $beginningCol = $(this).attr('class');
-    $beginningRow = $(this).parent().attr('class');
-    columnNum1 = parseInt($beginningCol.slice(8,9));
-    rowNum1 = charToNum[$beginningRow.slice(8,9)];
-    counter = 1;
-  } else if (counter === 1) {
-      $endingCol = $(this).attr('class');
-      $endingRow = $(this).parent().attr('class');
-      columnNum2 = parseInt($endingCol.slice(8,9));
-      rowNum2 = charToNum[$endingRow.slice(8,9)];
-      counter = 0;
-      attemptMove(rowNum1,columnNum1,rowNum2,columnNum2);
-  }
-};
-
-// var clickPiece2 = function() {
-// };
-
-
-// var clickCounter = function() {
+// var clickPiece = function() {
 //   if (counter === 0) {
-//     $(document).on('click', '.col', clickPiece);
+//     $beginningCol = $(this).attr('class');
+//     $beginningRow = $(this).parent().attr('class');
+//     columnNum1 = parseInt($beginningCol.slice(8,9));
+//     rowNum1 = charToNum[$beginningRow.slice(8,9)];
+//     counter = 1;
 //   } else if (counter === 1) {
-//     $(document).on('click', '.col', clickPiece2)
-//   };
+//       $endingCol = $(this).attr('class');
+//       $endingRow = $(this).parent().attr('class');
+//       columnNum2 = parseInt($endingCol.slice(8,9));
+//       rowNum2 = charToNum[$endingRow.slice(8,9)];
+//       counter = 0;
+//       attemptMove(rowNum1,columnNum1,rowNum2,columnNum2);
+//   }
 // };
-
 
 $(document).on('click', '.col', clickPiece);
 
