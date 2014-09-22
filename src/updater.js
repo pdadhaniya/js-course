@@ -13,8 +13,7 @@ $(document).on('pieceTaken', function(e, row, col) {
   } else {
     opponent = 'red';
   }
-  alert('The current player is ' + myColor + ' and your opponent is ' + opponent + '!');
-  alert('A piece was taken at row ' + row + ' column ' + col + '.');
+  alert('The current player is ' + myColor + ' and your opponent is ' + opponent + '! A piece was taken at row ' + row + ' column ' + col + '.');
 });
 
 
@@ -25,23 +24,23 @@ $(document).on('invalidMove', function(e, error) {
 $(document).on('errors', function(e) {
   $('.errors').empty();
   $('.errors').append('There have been ' + errors + ' erroneous moves.');
-})
+});
 
 
 $(document).on('turns', function(e) {
   $('.number').empty();
   $('.number').append('There have been ' + turns + ' turns.');
-})
+});
 
 $(document).on('newGame', function(e) {
   $('.games').empty();
   $('.games').append('There have been ' + games + ' games.' );
-})
+});
 
 $(document).on('taken', function(e) {
   $('.taken').empty();
   $('.taken').append('There have been ' + taken + ' pieces taken.');
-})
+});
 
 $(document).on('showPieces', function(e) {
   for (var x = 0; x < 8; x++) {

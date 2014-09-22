@@ -1,8 +1,9 @@
 var board, currentPlayer, input, integers, startRow, startCol;
-var endRow, endCol, turns, games, errors, taken;
+var endRow, endCol, turns, errors, taken;
 var $beginningCol, $beginningRow, columnNum1, rowNum1;
 var $endingCol, $endingRow, columnNum2, rowNum2;
 var counter = 0;
+var games = 0;
 
 var resetBoard = function () {
   board = [
@@ -17,7 +18,7 @@ var resetBoard = function () {
   ];
   $(document).trigger('addSpan');
 
-  currentPlayer = 'wht'
+  currentPlayer = 'wht';
 };
 
 var attemptMove = function (row1, col1, row2, col2) {
@@ -56,7 +57,7 @@ var attemptMove = function (row1, col1, row2, col2) {
       };
     }
    } else {
-      if (currentPlayer === 'red') {
+      if ((currentPlayer === 'red') && (board[row1][col1] === 'red')) {
         if ((row2-row1 === -1) && (Math.abs(col2-col1) === 1)) {
           makeMove(row1, col1, row2, col2);
         } else {
@@ -64,7 +65,7 @@ var attemptMove = function (row1, col1, row2, col2) {
           $(document).trigger('errors');
           $(document).trigger('invalidMove', ['Please make a valid move.']);
         }
-      } else if (currentPlayer === 'wht') {
+      } else if ((currentPlayer === 'wht') && (board[row1][col1] === 'wht')) {
         if ((row2-row1 === 1) && (Math.abs(col2-col1) === 1)) {
           makeMove(row1, col1, row2, col2);
         } else {
@@ -74,12 +75,11 @@ var attemptMove = function (row1, col1, row2, col2) {
       }
     }
   };
-
 };
 
 var canCapture = function() {
   if (currentPlayer === 'red') {
-    for (var r=0; r < 8; r++) {
+    for (var r=2; r < 8; r++) {
       for (var c=0; c < 8; c++) {
         if ( (board[r][c] === 'red') && ( ( (board[r-1][c-1] === 'wht') && (board[r-2][c-2] === ' X ') ) || ( (board[r-1][c+1] === 'wht') && (board[r-2][c+2] === ' X ') )  )) {
           return true;
@@ -87,7 +87,7 @@ var canCapture = function() {
       }
     }
   } else if (currentPlayer === 'wht') {
-    for (var r=0; r < 8; r++) {
+    for (var r=0; r < 6; r++) {
       for (var c=0; c < 8; c++) {
         if ( (board[r][c] === 'wht') && ( ( (board[r+1][c-1] === 'red') && (board[r+2][c-2] === ' X ') ) || ( (board[r+1][c+1] === 'red') && (board[r+2][c+2] === ' X ') )  )) {
           return true;
@@ -137,7 +137,6 @@ var getMove = function() {
   }
 };
 
-games = 0;
 
 var play = function() {
   resetBoard();
