@@ -3,3 +3,10 @@
 
 <p>Your single page app should go here.</p>
 </div>
+
+<script type="text/template" class="my-template">
+  <h1>Select a Quiz!</h1> 
+  <%% _.each(content, function(element){ %>
+    <button class="quiz-title" id=<%%=element.id%>><%%= element.title %></button></br>
+  <%% }); %>
+</script>
