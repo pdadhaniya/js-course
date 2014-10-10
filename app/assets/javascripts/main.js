@@ -12,7 +12,7 @@
 $(document).ready(function(){
   $.get('/quizzes', function(data){
 
-    var template = $(".my-template").html();
+    var template = $(".all-quiz-template").html();
     var uncompiledTemplate = _.template(template);
     var compiledTemplate = uncompiledTemplate({
       content: data
@@ -24,5 +24,16 @@ $(document).ready(function(){
 });
 
 $(document).on("click", ".quiz-title", function(){
-  console.log("HEY BUDDY!")
-})
+  var quizId = $(this).data('id');
+  $.get("/quizzes/"+quizId+"/questions", function(data){
+  // console.log(data[0].question);
+    var templateQuiz = $(".quiz-template").html();
+    var uncompiledTemplateQuiz = _.template(templateQuiz);
+    var compiledTemplateQuiz = uncompiledTemplateQuiz({
+      content: data
+    });
+    var $el = $(compiledTemplateQuiz);
+    $('body').empty();
+    $('body').append($el);
+  });
+});
