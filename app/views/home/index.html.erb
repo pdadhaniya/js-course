@@ -4,18 +4,40 @@
 <p>Your single page app should go here.</p>
 </div>
 
+<div class="all-quizzes">
 <script type="text/template" class="all-quiz-template">
   <h1>Select a Quiz!</h1> 
   <%% _.each(content, function(element){ %>
     <button class="quiz-title" data-id=<%%=element.id%>><%%= element.title %></button></br>
   <%% }); %>
 </script>
+</div>
 
+<!-- <div class="one-quiz">
 <script type="text/template" class="quiz-template">
   <h1>Question</h1>
   <%% _.each(content, function(element){ %>
-    <h3><%%=element.question%></h3>
-    <h1>Answers</h1>
-    <p><%%=element.choices%></p>
+    <h3><%%=content.question%></h3>
+    <h3>Answers</h3>
+    <%% _.each(options, function(element){ %>
+      <p><%%=element%></p>
+    <%% }); %>
   <%% }); %>
 </script>
+</div> -->
+
+<div class="one-quiz">
+<script type="text/template" class="quiz-template">
+  <h1>Question</h1>
+    <h3><%%=content.question%></h3>
+    <h3>Answers</h3>
+    <%% _.each(options, function(element){ %>
+      <p><%%=element%></p>
+    <%% }); %>
+</script>
+</div>
+
+
+
+<div class="display">
+</div>

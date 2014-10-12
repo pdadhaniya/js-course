@@ -19,21 +19,24 @@ $(document).ready(function(){
     });
     var $el = $(compiledTemplate);
     $('.intro').empty();
-    $('body').append($el);
+    $('.display').html($el);
   });
 });
 
 $(document).on("click", ".quiz-title", function(){
   var quizId = $(this).data('id');
   $.get("/quizzes/"+quizId+"/questions", function(data){
-  // console.log(data[0].question);
+    var counter = 0
+    console.log(data[0])
     var templateQuiz = $(".quiz-template").html();
     var uncompiledTemplateQuiz = _.template(templateQuiz);
     var compiledTemplateQuiz = uncompiledTemplateQuiz({
-      content: data
+      // counter for index
+      content: data[counter],
+      options: data[counter].choices.split(";")
     });
     var $el = $(compiledTemplateQuiz);
-    $('body').empty();
-    $('body').append($el);
+    $('.display').html($el);
+    // increment counter on click
   });
 });
