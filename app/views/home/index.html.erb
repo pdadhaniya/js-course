@@ -30,9 +30,9 @@
 <script type="text/template" class="quiz-template">
   <h1>Question</h1>
     <h3><%%=content.question%></h3>
-    <h3>Answers</h3>
+    <h3>Choices</h3>
     <%% _.each(options, function(element){ %>
-      <p><%%=element%></p>
+      <button class="quiz-choice" id=<%%=element%>><%%=element%></button><br><br>
     <%% }); %>
 </script>
 </div>
