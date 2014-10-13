@@ -59,3 +59,39 @@ var nextQuestion = function(){
     }
   });
 }
+
+$(document).on("click", ".new-quiz", function(){
+  $('.display').html("<form id='quiz-form'><h1>New Quiz!</h1><br>Quiz Title: <br><input class='quiz-form-title' label='title' name='title' type='text'><br><input label='submit' type='submit'></form>");
+  $('.add-quiz').css("visibility", "hidden");
+
+  $('#quiz-form').submit(function(e){
+    e.preventDefault();
+    var qtitle = $('.quiz-form-title').val();
+    var object = {
+      title: qtitle,
+    };
+    console.log('new-quiz trigger');
+    $(document).trigger('new-quiz', [object]);
+  });
+})
+
+
+$(document).on('new-quiz', function(e, object) {
+  console.log('attempting to post');
+  $.post('/quizzes',
+    { 
+      "quiz[title]": object.title
+    }
+)});
+
+
+
+
+
+
+
+
+
+
+
+
