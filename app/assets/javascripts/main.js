@@ -1,5 +1,5 @@
 var counter = 0;
-var answer, correct, quizId;
+var answer, correct, quizId, newQuizId;
 var numberCorrect = 0;
 
 $(document).ready(function(){
@@ -73,7 +73,6 @@ $(document).on("click", ".new-quiz", function(){
   });
 })
 
-var newQuizId;
 $(document).on('new-quiz', function(e, object) {
   $.post('/quizzes',
     { 
@@ -88,7 +87,6 @@ $(document).on('new-quiz', function(e, object) {
           "question[choices]": object.choices,
           "question[type]": "multiple",
         })
-      console.log(object);
     })
 });
 
