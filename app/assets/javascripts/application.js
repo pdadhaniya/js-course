@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require underscore
 //= require main
+//= require one_quiz
+//= require new_quiz
 // Your Quizzy code should go here.
