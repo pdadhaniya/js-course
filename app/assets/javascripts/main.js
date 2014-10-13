@@ -3,16 +3,7 @@ var answer, correct, quizId;
 var numberCorrect = 0;
 
 $(document).ready(function(){
-  $.get('/quizzes', function(data){
-    var template = $(".all-quiz-template").html();
-    var uncompiledTemplate = _.template(template);
-    var compiledTemplate = uncompiledTemplate({
-      content: data
-    });
-    var $el = $(compiledTemplate);
-    $('.intro').empty();
-    $('.display').html($el);
-  });
+  showStart();
 });
 
 $(document).on("click", ".quiz-title", function(){
@@ -27,6 +18,7 @@ $(document).on("click", ".quiz-title", function(){
     });
     var $el = $(compiledTemplateQuiz);
     $('.display').html($el);
+    $('.add-quiz').css("visibility", "hidden");
   });
 });
 
@@ -45,7 +37,7 @@ $(document).on("click", ".quiz-choice", function(){
 var nextQuestion = function(){
   $.get("/quizzes/"+quizId+"/questions", function(data){
     if (data.length === counter) {
-      $('.display').html("<h1>You got "+(numberCorrect*100)/data.length+"% right!</h1>");
+      $('.display').html("<h1>You got "+(numberCorrect*100)/data.length+"% right!</h1><br><button class='show-start'>Home</button>");
     } else {
       answer = data[counter].answer
       var templateQuiz = $(".quiz-template").html();
@@ -56,14 +48,14 @@ var nextQuestion = function(){
       });
       var $el = $(compiledTemplateQuiz);
       $('.display').html($el);
+      $('.add-quiz').css("visibility", "hidden");
     }
   });
 }
 
 $(document).on("click", ".new-quiz", function(){
   $('.display').html("<form id='quiz-form'><h1>New Quiz!</h1><br>Quiz Title: <br><input class='quiz-form-title' label='title' name='title' type='text'><br>Question 1: <br><input class='quiz-form-question1' label='question' name='question' type='text'><br>Choices: <br><input class='quiz-form-choices' label='choices' name='choices' type='text'><br>Answer: <br><input class='quiz-form-answer' label='answer' name='answer' type='text'><br><input label='submit' type='submit'></form>");
-  // $('.add-quiz').css("visibility", "hidden");
-  $('.add-quiz').empty();
+  $('.add-quiz').css("visibility", "hidden");
 
   $('#quiz-form').submit(function(e){
     e.preventDefault();
@@ -100,8 +92,21 @@ $(document).on('new-quiz', function(e, object) {
     })
 });
 
+var showStart = function(){
+  $.get('/quizzes', function(data){
+  var template = $(".all-quiz-template").html();
+  var uncompiledTemplate = _.template(template);
+  var compiledTemplate = uncompiledTemplate({
+    content: data
+  });
+  var $el = $(compiledTemplate);
+  $('.intro').empty();
+  $('.display').html($el);
+  });
+  $('.add-quiz').css("visibility", "visible");
+}
 
-
+$(document).on("click", ".show-start", showStart);
 
 
 
