@@ -1,12 +1,12 @@
-var counter = 0;
-var answer, correct, quizId, newQuizId;
-var numberCorrect = 0;
+var answer, correct, counter, quizId, newQuizId, numberCorrect;
 
 $(document).ready(function(){
   showStart();
 });
 
 var showStart = function(){
+  counter = 0;
+  numberCorrect = 0;
   $.get('/quizzes', function(data){
   var template = $(".all-quiz-template").html();
   var uncompiledTemplate = _.template(template);
